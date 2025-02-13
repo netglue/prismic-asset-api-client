@@ -1,0 +1,10 @@
+parameters:
+	level: 10
+	paths:
+		- src
+		- test
+	ignoreErrors:
+	treatPhpDocTypesAsCertain: true
+	reportUnmatchedIgnoredErrors: true
+includes:
+	- vendor/cuyz/valinor/qa/PHPStan/valinor-phpstan-configuration.php

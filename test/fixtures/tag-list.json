@@ -1,0 +1,19 @@
+{
+    "items": [
+        {
+            "id": "4030d85a-d080-4562-a3f6-a852ebcf5e9a",
+            "name": "tag2",
+            "last_modified": 1739397608157,
+            "created_at": 1739397608157,
+            "count": 0
+        },
+        {
+            "id": "f62b96a4-0755-47eb-ae3b-323427a7459c",
+            "name": "tag1",
+            "last_modified": 1739381823357,
+            "created_at": 1739381823357,
+            "uploader_id": "531f7ac178c4efa460c33fb7",
+            "count": 1
+        }
+    ]
+}

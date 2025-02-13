@@ -1,0 +1,92 @@
+{
+    "total": 6,
+    "items": [
+        {
+            "id": "Z60AAZbqstJ9-i5w",
+            "url": "https://some-repo.cdn.prismic.io/some-repo/Z60AAZbqstJ9-i5w_some-video-480p.mp4",
+            "filename": "some-video-480p.mp4",
+            "size": 3417489,
+            "last_modified": 1739390977692,
+            "kind": "video",
+            "extension": "mp4",
+            "uploader_id": "Ux96wXjE76Rgwz-3",
+            "created_at": 1739390977692,
+            "tags": []
+        },
+        {
+            "id": "Z6z_wZbqstJ9-i5r",
+            "url": "https://some-repo.cdn.prismic.io/some-repo/Z6z_wZbqstJ9-i5r_some-video-480p.mov",
+            "filename": "some-video-480p.mov",
+            "size": 3043653,
+            "last_modified": 1739390913340,
+            "kind": "video",
+            "extension": "mov",
+            "uploader_id": "Ux96wXjE76Rgwz-3",
+            "created_at": 1739390913340,
+            "tags": []
+        },
+        {
+            "id": "Z6zcs5bqstJ9-inC",
+            "url": "https://some-repo.cdn.prismic.io/some-repo/Z6zcs5bqstJ9-inC_some-file",
+            "filename": "some-file",
+            "size": 10,
+            "last_modified": 1739381939122,
+            "kind": "document",
+            "extension": "",
+            "uploader_id": "Ux96wXjE76Rgwz-3",
+            "created_at": 1739381939122,
+            "tags": []
+        },
+        {
+            "id": "Z6zcRZbqstJ9-ims",
+            "url": "https://some-repo.cdn.prismic.io/some-repo/Z6zcRZbqstJ9-ims_some-file.txt",
+            "filename": "some-file.txt",
+            "size": 10,
+            "last_modified": 1739381829538,
+            "kind": "document",
+            "extension": "txt",
+            "uploader_id": "Ux96wXjE76Rgwz-3",
+            "created_at": 1739381829538,
+            "tags": []
+        },
+        {
+            "id": "Z6zcM5bqstJ9-imm",
+            "url": "https://some-repo.cdn.prismic.io/some-repo/Z6zcM5bqstJ9-imm_going-offline.pdf",
+            "filename": "going-offline.pdf",
+            "size": 2587625,
+            "last_modified": 1739381823602,
+            "kind": "document",
+            "extension": "pdf",
+            "uploader_id": "Ux96wXjE76Rgwz-3",
+            "created_at": 1739381811817,
+            "tags": [
+                {
+                    "id": "f62b96a4-0755-47eb-ae3b-323427a7459c",
+                    "name": "tag1",
+                    "last_modified": 1739381823357,
+                    "created_at": 1739381823357,
+                    "uploader_id": "531f7ac178c4efa460c33fb7"
+                }
+            ]
+        },
+        {
+            "id": "Z6zKUJbqstJ9-iXW",
+            "url": "https://images.prismic.io/some-repo/Z6zKUJbqstJ9-iXW_SCR-20250212-noxv.png?auto=format,compress",
+            "filename": "SCR-20250212-noxv.png",
+            "size": 18191,
+            "width": 649,
+            "height": 265,
+            "last_modified": 1739377232557,
+            "kind": "image",
+            "extension": "png",
+            "notes": "Some Notes",
+            "credits": "Some Credits",
+            "alt": "Some Alt",
+            "uploader_id": "ghost",
+            "created_at": 1739377232557,
+            "tags": []
+        }
+    ],
+    "cursor": "eyJjcmVhdGVkQXQiOjE3MzkzNzcyMzI1NTd9",
+    "is_opensearch_result": false
+}

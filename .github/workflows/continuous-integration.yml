@@ -1,0 +1,55 @@
+name: "Continuous Integration"
+
+on:
+  pull_request:
+  push:
+    branches:
+    tags:
+
+env:
+  php_extensions: ctype,intl,json,libxml,mbstring
+  default_php: 8.3
+
+jobs:
+  matrix:
+    name: Generate job matrix
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.matrix.outputs.matrix }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: Gather CI configuration
+        id: matrix
+        uses: laminas/laminas-ci-matrix-action@v1
+
+  qa:
+    name: QA Checks
+    needs: [ matrix ]
+    runs-on: ${{ matrix.operatingSystem }}
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.matrix.outputs.matrix) }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.2.2
+      - name: ${{ matrix.name }}
+        uses: laminas/laminas-continuous-integration-action@v1
+        env:
+          "GITHUB_TOKEN": ${{ secrets.GITHUB_TOKEN }}
+        with:
+          job: ${{ matrix.job }}
+
+  composer-require-checker:
+    name: "Check for missing dependencies"
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: shivammathur/setup-php@2.32.0
+        with:
+          php-version: ${{ env.default_php }}
+          ini-values: memory_limit=-1
+          extensions: ${{ env.php_extensions }}
+      - uses: "ramsey/composer-install@3.0.0"
+      - run: make deps

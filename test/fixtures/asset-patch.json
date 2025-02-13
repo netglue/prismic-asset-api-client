@@ -1,0 +1,31 @@
+{
+    "id": "Z6zKUJbqstJ9-iXW",
+    "url": "https://images.prismic.io/some-repo/Z6zKUJbqstJ9-iXW_SCR-20250212-noxv.png?auto=format,compress",
+    "filename": "some-file.png",
+    "size": 18191,
+    "width": 649,
+    "height": 265,
+    "created_at": 1739377232557,
+    "last_modified": 1739403498568,
+    "kind": "image",
+    "uploader_id": "ghost",
+    "notes": "Some Notes",
+    "credits": "Some Credits",
+    "alt": "",
+    "extension": "png",
+    "tags": [
+        {
+            "id": "4030d85a-d080-4562-a3f6-a852ebcf5e9a",
+            "name": "tag2",
+            "created_at": 1739397608157,
+            "last_modified": 1739397608157
+        },
+        {
+            "id": "f62b96a4-0755-47eb-ae3b-323427a7459c",
+            "name": "tag1",
+            "created_at": 1739381823357,
+            "last_modified": 1739381823357,
+            "uploader_id": "531f7ac178c4efa460c33fb7"
+        }
+    ]
+}
