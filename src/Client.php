@@ -14,11 +14,6 @@ interface Client
 {
     public const string DEFAULT_BASE_URI = 'https://asset-api.prismic.io';
 
-    /**
-     * The hard limit imposed in GET /assets
-     */
-    public const int RESULT_LIMIT = 10;
-
     public const int MAX_TAG_LENGTH = 20;
 
     /**
