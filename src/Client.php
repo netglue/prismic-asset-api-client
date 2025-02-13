@@ -4,7 +4,10 @@ declare(strict_types=1);
 
 namespace Prismic\Asset;
 
+use Prismic\Asset\Exception\CommunicationFailure;
 use Prismic\Asset\Exception\InvalidTagName;
+use Prismic\Asset\Exception\RequestFailure;
+use Prismic\Asset\Exception\UnexpectedResponse;
 use Prismic\Asset\Model\Asset;
 use Prismic\Asset\Model\AssetPatch;
 use Prismic\Asset\Model\AssetTag;
@@ -23,6 +26,10 @@ interface Client
      * results per request.
      *
      * @return list<Asset>
+     *
+     * @throws CommunicationFailure If the API cannot be reached.
+     * @throws RequestFailure If any request is rejected by the remote API.
+     * @throws UnexpectedResponse If the API sends back a response we don't understand.
      */
     public function listAssets(): array;
 
@@ -30,6 +37,10 @@ interface Client
      * Delete a single asset
      *
      * @param non-empty-string $id
+     *
+     * @throws CommunicationFailure If the API cannot be reached.
+     * @throws RequestFailure If any request is rejected by the remote API.
+     * @throws UnexpectedResponse If the API sends back a response we don't understand.
      */
     public function deleteAsset(string $id): void;
 
@@ -45,6 +56,9 @@ interface Client
      * @param list<non-empty-string> $tags        Optional list of tag names to apply to the file
      *
      * @throws InvalidTagName If any of the given tags are invalid.
+     * @throws CommunicationFailure If the API cannot be reached.
+     * @throws RequestFailure If any request is rejected by the remote API.
+     * @throws UnexpectedResponse If the API sends back a response we don't understand.
      */
     public function uploadAsset(
         string $fileContent,
@@ -60,11 +74,18 @@ interface Client
      * Updates asset meta data to the desired values contained in the argument
      *
      * @throws InvalidTagName If any of the given tags are invalid.
+     * @throws CommunicationFailure If the API cannot be reached.
+     * @throws RequestFailure If any request is rejected by the remote API.
+     * @throws UnexpectedResponse If the API sends back a response we don't understand.
      */
     public function patchAssetMetaData(AssetPatch $patch): Asset;
 
     /**
      * Fetch the current list of asset tags
+     *
+     * @throws CommunicationFailure If the API cannot be reached.
+     * @throws RequestFailure If any request is rejected by the remote API.
+     * @throws UnexpectedResponse If the API sends back a response we don't understand.
      */
     public function getTags(): TagCollection;
 
@@ -74,6 +95,9 @@ interface Client
      * @param non-empty-string $tagName Tag names must be between 3 and 20 characters inclusive
      *
      * @throws InvalidTagName If the given tag is invalid.
+     * @throws CommunicationFailure If the API cannot be reached.
+     * @throws RequestFailure If any request is rejected by the remote API.
+     * @throws UnexpectedResponse If the API sends back a response we don't understand.
      */
     public function createTag(string $tagName): AssetTag;
 }
