@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Prismic\Asset;
 
+use Prismic\Asset\Exception\InvalidTagName;
 use Prismic\Asset\Model\Asset;
 use Prismic\Asset\Model\AssetPatch;
 use Prismic\Asset\Model\AssetTag;
@@ -17,6 +18,8 @@ interface Client
      * The hard limit imposed in GET /assets
      */
     public const int RESULT_LIMIT = 10;
+
+    public const int MAX_TAG_LENGTH = 20;
 
     /**
      * Fetch a list of all assets
@@ -45,6 +48,8 @@ interface Client
      * @param non-empty-string|null  $credits     Optional, copyright info
      * @param non-empty-string|null  $alt         Optional, Alt text for images
      * @param list<non-empty-string> $tags        Optional list of tag names to apply to the file
+     *
+     * @throws InvalidTagName If any of the given tags are invalid.
      */
     public function uploadAsset(
         string $fileContent,
@@ -56,6 +61,11 @@ interface Client
         array $tags = [],
     ): Asset;
 
+    /**
+     * Updates asset meta data to the desired values contained in the argument
+     *
+     * @throws InvalidTagName If any of the given tags are invalid.
+     */
     public function patchAssetMetaData(AssetPatch $patch): Asset;
 
     /**
@@ -67,6 +77,8 @@ interface Client
      * Create an asset tag
      *
      * @param non-empty-string $tagName Tag names must be between 3 and 20 characters inclusive
+     *
+     * @throws InvalidTagName If the given tag is invalid.
      */
     public function createTag(string $tagName): AssetTag;
 }

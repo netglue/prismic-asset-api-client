@@ -9,6 +9,7 @@ use CuyZ\Valinor\MapperBuilder;
 use Fig\Http\Message\RequestMethodInterface;
 use Override;
 use Prismic\Asset\Exception\CommunicationFailure;
+use Prismic\Asset\Exception\InvalidTagName;
 use Prismic\Asset\Exception\RequestFailure;
 use Prismic\Asset\Exception\UnexpectedResponse;
 use Prismic\Asset\Model\Asset;
@@ -32,6 +33,7 @@ use function implode;
 use function json_encode;
 use function ltrim;
 use function sprintf;
+use function strlen;
 
 use const JSON_THROW_ON_ERROR;
 
@@ -86,6 +88,7 @@ final readonly class AssetClient implements Client
         string|null $alt = null,
         array $tags = [],
     ): Asset {
+        self::assertValidTagList($tags);
         $boundary = '--__X_Prismic-Asset-Boundary__--';
 
         $payload = [
@@ -160,6 +163,8 @@ final readonly class AssetClient implements Client
     #[Override]
     public function patchAssetMetaData(AssetPatch $patch): Asset
     {
+        self::assertValidTagList($patch->tags ?? []);
+
         $payload = $patch->toArray();
         if (isset($payload['tags']) && $payload['tags'] !== []) {
             $payload['tags'] = $this->resolveTags($payload['tags']);
@@ -212,6 +217,8 @@ final readonly class AssetClient implements Client
     #[Override]
     public function createTag(string $tagName): AssetTag
     {
+        self::assertValidTag($tagName);
+
         $request = $this->createRequest(RequestMethodInterface::METHOD_POST, '/tags')
             ->withHeader('Content-Type', 'application/json')
             ->withBody($this->streamFactory->createStream(
@@ -304,6 +311,24 @@ final readonly class AssetClient implements Client
                 );
         } catch (Throwable $e) {
             throw new UnexpectedResponse('Failed to parse response payload', 0, $e);
+        }
+    }
+
+    /** @param non-empty-string $tag */
+    private static function assertValidTag(string $tag): void
+    {
+        if (strlen($tag) <= Client::MAX_TAG_LENGTH) {
+            return;
+        }
+
+        throw InvalidTagName::for($tag);
+    }
+
+    /** @param list<non-empty-string> $tags */
+    private static function assertValidTagList(array $tags): void
+    {
+        foreach ($tags as $tag) {
+            self::assertValidTag($tag);
         }
     }
 }

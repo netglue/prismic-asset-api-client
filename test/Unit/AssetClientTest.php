@@ -13,9 +13,11 @@ use Laminas\Diactoros\Response;
 use Laminas\Diactoros\StreamFactory;
 use Laminas\Diactoros\UriFactory;
 use Override;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Prismic\Asset\AssetClient;
 use Prismic\Asset\Exception\CommunicationFailure;
+use Prismic\Asset\Exception\InvalidTagName;
 use Prismic\Asset\Exception\RequestFailure;
 use Prismic\Asset\Exception\UnexpectedResponse;
 use Prismic\Asset\Model\AssetPatch;
@@ -24,6 +26,7 @@ use Psr\Http\Message\ResponseInterface;
 
 use function file_get_contents;
 use function json_encode;
+use function str_repeat;
 
 use const JSON_THROW_ON_ERROR;
 
@@ -401,5 +404,21 @@ class AssetClientTest extends TestCase
         $this->http->addException(new NetworkException('Foo', new Request()));
         $this->expectException(CommunicationFailure::class);
         $this->client->getTags();
+    }
+
+    /** @return list<array{0: non-empty-string}> */
+    public static function invalidTags(): array
+    {
+        return [
+            [str_repeat('a', 21)],
+        ];
+    }
+
+    /** @param non-empty-string $tag */
+    #[DataProvider('invalidTags')]
+    public function testCreateTagThrowsExceptionForInvalidTag(string $tag): void
+    {
+        $this->expectException(InvalidTagName::class);
+        $this->client->createTag($tag);
     }
 }
