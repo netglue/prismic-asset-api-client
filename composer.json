@@ -1,6 +1,6 @@
 {
     "name": "netglue/prismic-asset-api-client",
-    "type": "project",
+    "type": "library",
     "license": "MIT",
     "authors": [
         {
