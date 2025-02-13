@@ -34,6 +34,7 @@ use function json_encode;
 use function ltrim;
 use function sprintf;
 use function strlen;
+use function uniqid;
 
 use const JSON_THROW_ON_ERROR;
 
@@ -89,12 +90,13 @@ final readonly class AssetClient implements Client
         array $tags = [],
     ): Asset {
         self::assertValidTagList($tags);
-        $boundary = '--__X_Prismic-Asset-Boundary__--';
+        $boundary = uniqid('--__X_Prismic-Asset-Boundary');
 
         $payload = [
-            $boundary,
+            '--' . $boundary,
             sprintf('Content-Disposition: form-data; name="file"; filename="%s"', $fileName),
             sprintf('Content-Type: %s', $mimeType),
+            '',
             $fileContent,
         ];
 
@@ -109,10 +111,14 @@ final readonly class AssetClient implements Client
                 continue;
             }
 
-            $payload[] = $boundary;
+            $payload[] = '--' . $boundary;
             $payload[] = sprintf('Content-Disposition: form-data; name="%s"', $name);
+            $payload[] = '';
             $payload[] = $value;
         }
+
+        $payload[] = '--' . $boundary . '--';
+        $payload[] = '';
 
         $payload = implode("\r\n", $payload);
 
