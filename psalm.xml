@@ -18,6 +18,12 @@
         </ignoreFiles>
     </projectFiles>
     <issueHandlers>
+        <!-- PHPUnit Data Providers are always "un-used" -->
+        <PossiblyUnusedMethod>
+            <errorLevel type="suppress">
+                <directory name="test" />
+            </errorLevel>
+        </PossiblyUnusedMethod>
     </issueHandlers>
     <plugins>
         <pluginClass class="Psalm\PhpUnitPlugin\Plugin"/>
